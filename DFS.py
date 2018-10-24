@@ -1,5 +1,6 @@
 import header
 INP_FILE = "graph_qsample.dat"
+NUMBER_OF_VERTICES = 7
 
 
 def DFS(graph, source):
@@ -29,7 +30,7 @@ def DFS(graph, source):
 
 
 fin = open(INP_FILE, "r")
-g = header.Graph(fin, 7)
+g = header.Graph(fin, NUMBER_OF_VERTICES)
 g.displayVertices()
 DFS(g, g.vertices[4])
 fin.close()
