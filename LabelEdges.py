@@ -16,7 +16,7 @@ def labelEdges(graph, v):
     v.dfsNum = labelEdges.counter
 
     for w in v.adjVertices:
-        if w.status != "Visited":   # if it has not been visited, then visit it and the edge becomes a tree edge.
+        if w.status != "Visited":   # if it has not been visited, then visit it and the edge becomes a tree edge
             w.parent = v
             graph.edges[(v, w)].type = "Tree Edge"
             print(v.name +  ",", w.name, "is a tree edge")
