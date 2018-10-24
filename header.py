@@ -74,6 +74,7 @@ class Graph:
                 if j != adjVerticesCount -1:
                     print(", ", end="")
             print()
+        print()
 
 
     def displayVerticesStatus(self):
@@ -81,6 +82,8 @@ class Graph:
 
         for i in range(self.vertexCount):
             print(self.vertices[i].name, " : ", self.vertices[i].status)
+
+        print()
 
 
     def reset(self):
