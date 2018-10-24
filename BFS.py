@@ -1,0 +1,40 @@
+import header
+import collections
+INP_FILE = "graph_qsample.dat"
+
+
+def BFS(graph, source):
+    try:
+        BFS.bfsTreeNum += 1
+        print("\nBFS Tree number", BFS.bfsTreeNum)
+    except AttributeError:
+        BFS.bfsTreeNum = 1
+        graph.reset()
+        print("BFS Tree number 1")
+
+    Q = collections.deque()
+    Q.append(source)
+    source.status = "Added to Queue"
+
+    while len(Q) > 0:
+        vertex = Q.popleft()
+        vertex.status = "Visited"
+        print(vertex.name, "  ", end="")
+
+        for neighbour in vertex.adjVertices:
+            if neighbour.status is None:
+                neighbour.status = "Added to Queue"
+                Q.append(neighbour)
+
+    if BFS.bfsTreeNum == 1:
+        for vertex in graph.vertices:
+            if vertex.status != "Visited":
+                BFS(graph, vertex)
+        print()
+
+
+fin = open(INP_FILE, "r")
+g = header.Graph(fin, 7)
+g.displayVertices()
+BFS(g, g.vertices[4])
+fin.close()
