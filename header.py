@@ -89,3 +89,4 @@ class Graph:
     def reset(self):
         for i in range(self.vertexCount):
             self.vertices[i].status = None
+            self.vertices[i].colour = None

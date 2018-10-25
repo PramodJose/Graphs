@@ -11,15 +11,16 @@ def findArticulationPoints(graph, v):
         graph.reset()
 
     v.dfsNum = v.low = findArticulationPoints.counter
-    v.visited = "Visited"
+    v.status = "Visited"
 
     for w in v.adjVertices:
         if w.status != "Visited":
             w.parent = v
-            # w.low = v.dfsNum
+            w.low = v.dfsNum
             findArticulationPoints(graph, w)
-            if w.low >= v.dfsNum:
+            if w.low >= v.dfsNum and v.colour != "Black":
                 print(v.name, "is an articulation point")
+                v.colour = "Black"
             v.low = min(v.low, w.low)
         elif v.parent != w:
             v.low = min(v.low, w.dfsNum)
