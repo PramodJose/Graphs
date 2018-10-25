@@ -17,10 +17,12 @@ def findArticulationPoints(graph, v):
         if w.status != "Visited":
             w.parent = v
             findArticulationPoints(graph, w)
-            if w.low >= v.dfsNum and v.colour != "Black":
+
+            if w.low >= v.dfsNum and v.colour != "Printed":
                 print(v.name, "is an articulation point")
-                v.colour = "Black"
+                v.colour = "Printed"
             v.low = min(v.low, w.low)
+
         elif v.parent != w:
             v.low = min(v.low, w.dfsNum)
 
