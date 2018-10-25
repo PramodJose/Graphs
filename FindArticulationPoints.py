@@ -16,7 +16,6 @@ def findArticulationPoints(graph, v):
     for w in v.adjVertices:
         if w.status != "Visited":
             w.parent = v
-            w.low = v.dfsNum
             findArticulationPoints(graph, w)
             if w.low >= v.dfsNum and v.colour != "Black":
                 print(v.name, "is an articulation point")
