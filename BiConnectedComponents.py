@@ -1,6 +1,7 @@
 import header
-INP_FILE = "graph_articulation_points.dat"
-NUMBER_OF_VERTICES = 7
+import collections
+INP_FILE = "graph_articulation_points2.dat"
+NUMBER_OF_VERTICES = 5
 
 
 def findBiConnectedComponents(graph, v):
@@ -9,11 +10,14 @@ def findBiConnectedComponents(graph, v):
     except AttributeError:
         findBiConnectedComponents.counter = 1
         findBiConnectedComponents.componentNum = 1
+        findBiConnectedComponents.stack = collections.deque()
         print("The Bi-Connected components are:-\nComponent 1:")
         graph.reset()
 
     v.status = "Visited"
     v.dfsNum = v.low = findBiConnectedComponents.counter
+    findBiConnectedComponents.stack.append(v)
+    #print(v.name)
 
     for w in v.adjVertices:
         if w.status != "Visited":
@@ -21,21 +25,24 @@ def findBiConnectedComponents(graph, v):
             findBiConnectedComponents(graph, w)
 
             if w.low >= v.dfsNum and v.colour != "Black":       # v is an articulation point
-                print(v.name)
+                while True:
+                    vertex = findBiConnectedComponents.stack.pop()
+                    print(vertex.name, "  ", end="")
+
+                    if vertex == v:
+                        break
+
                 findBiConnectedComponents.componentNum += 1
-                print("Component", findBiConnectedComponents.componentNum)
-                print(v.name, "", end="")
+                print("\nComponent", findBiConnectedComponents.componentNum)
+                print(v.name, "  ", end="")
                 v.colour = "Black"
 
         elif v.parent != w:
             v.low = min(v.low, w.dfsNum)
 
-    if v.colour != "Black":
-        print(v.name, "", end="")
-
 
 fin = open(INP_FILE, "r")
 g = header.Graph(fin, NUMBER_OF_VERTICES)
 g.displayVertices()
-findBiConnectedComponents(g, g.vertices[3])
+findBiConnectedComponents(g, g.vertices[0])
 fin.close()
