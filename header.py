@@ -59,7 +59,6 @@ class Graph:
                 self.vertices[i].adjVertices.append(neighbour)
                 self.edges[(self.vertices[i], neighbour)] = newEdge
 
-
     def displayVertices(self):
         print("The graph is:-")
 
@@ -76,15 +75,13 @@ class Graph:
             print()
         print()
 
-
-    def displayVerticesStatus(self):
+    def displayVerticesStatus(self):    # Primarily used for debugging code.
         print("The status of the vertices are:-")
 
         for i in range(self.vertexCount):
             print(self.vertices[i].name, " : ", self.vertices[i].status)
 
         print()
-
 
     def reset(self):
         for i in range(self.vertexCount):
