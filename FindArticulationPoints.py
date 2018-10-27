@@ -1,6 +1,5 @@
 import header
 INP_FILE = "graph_articulation_points.dat"
-NUMBER_OF_VERTICES = 7
 
 
 def findArticulationPoints(graph, v):
@@ -28,6 +27,7 @@ def findArticulationPoints(graph, v):
 
 
 fin = open(INP_FILE, "r")
+NUMBER_OF_VERTICES= int(fin.readline().split()[0])
 g = header.Graph(fin, NUMBER_OF_VERTICES)
 g.displayVertices()
 findArticulationPoints(g, g.vertices[0])

@@ -1,7 +1,6 @@
 import header
 import collections
 INP_FILE = "graph_qsample.dat"
-NUMBER_OF_VERTICES = 7
 
 
 def BFS(graph, source):
@@ -35,6 +34,7 @@ def BFS(graph, source):
 
 
 fin = open(INP_FILE, "r")
+NUMBER_OF_VERTICES= int(fin.readline().split()[0])
 g = header.Graph(fin, NUMBER_OF_VERTICES)
 g.displayVertices()
 BFS(g, g.vertices[4])

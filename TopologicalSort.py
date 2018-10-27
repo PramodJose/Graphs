@@ -1,7 +1,6 @@
 import header
 import collections
 INP_FILE = "graph_topological_sort.dat"
-NUMBER_OF_VERTICES = 7
 
 
 def topologicalSort(graph):
@@ -35,6 +34,7 @@ def topologicalSort(graph):
 
 
 fin = open(INP_FILE, "r")
+NUMBER_OF_VERTICES= int(fin.readline().split()[0])
 g = header.Graph(fin, NUMBER_OF_VERTICES)
 g.displayVertices()
 topologicalSort(g)

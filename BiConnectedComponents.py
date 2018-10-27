@@ -1,7 +1,6 @@
 import header
 import collections
 INP_FILE = "graph_articulation_points2.dat"
-NUMBER_OF_VERTICES = 5
 
 
 def findBiConnectedComponents(graph, v):
@@ -42,6 +41,7 @@ def findBiConnectedComponents(graph, v):
 
 
 fin = open(INP_FILE, "r")
+NUMBER_OF_VERTICES= int(fin.readline().split()[0])
 g = header.Graph(fin, NUMBER_OF_VERTICES)
 g.displayVertices()
 findBiConnectedComponents(g, g.vertices[0])
