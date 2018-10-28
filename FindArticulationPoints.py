@@ -17,7 +17,7 @@ def findArticulationPoints(graph, v):
             w.parent = v
             findArticulationPoints(graph, w)
 
-            if w.low >= v.dfsNum and v.colour != "Printed":
+            if v.dfsNum != 1 and w.low >= v.dfsNum and v.colour != "Printed":
                 print(v.name, "is an articulation point")
                 v.colour = "Printed"
             v.low = min(v.low, w.low)
@@ -25,6 +25,8 @@ def findArticulationPoints(graph, v):
         elif v.parent != w:
             v.low = min(v.low, w.dfsNum)
 
+    if v.dfsNum == 1 and len(v.adjVertices) > 1:
+        print(v.name, "is an articulation point")
 
 fin = open(INP_FILE, "r")
 NUMBER_OF_VERTICES= int(fin.readline().split()[0])
