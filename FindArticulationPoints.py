@@ -1,5 +1,5 @@
 import header
-INP_FILE = "graph_articulation_points.dat"
+INP_FILE = "graph_articulation_points_graph5.dat"
 
 
 def findArticulationPoints(graph, v):
@@ -9,6 +9,7 @@ def findArticulationPoints(graph, v):
         findArticulationPoints.counter = 1
         graph.reset()
         childrenOfRoot = 0
+        print("Source is", v.name)
 
     v.dfsNum = v.low = findArticulationPoints.counter
     v.status = "Visited"
@@ -36,5 +37,6 @@ fin = open(INP_FILE, "r")
 NUMBER_OF_VERTICES= int(fin.readline().split()[0])
 g = header.Graph(fin, NUMBER_OF_VERTICES)
 g.displayVertices()
-findArticulationPoints(g, g.vertices[3])
+source = g.vertices[int(fin.readline().split()[0]) - 1]
+findArticulationPoints(g, source)
 fin.close()
