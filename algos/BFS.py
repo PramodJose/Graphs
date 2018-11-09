@@ -1,6 +1,6 @@
 import header
 import collections
-INP_FILE = "graph_qsample.dat"
+INP_FILE = "../graphs/graph_qsample.dat"
 
 
 def BFS(graph, source):

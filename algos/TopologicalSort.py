@@ -1,6 +1,6 @@
 import header
 import collections
-INP_FILE = "graph_topological_sort.dat"
+INP_FILE = "../graphs/graph_topological_sort.dat"
 
 
 def topologicalSort(graph):

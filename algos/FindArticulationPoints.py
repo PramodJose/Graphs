@@ -1,5 +1,5 @@
 import header
-INP_FILE = "graph_articulation_points_graph5.dat"
+INP_FILE = "../graphs/graph_articulation_points_graph5.dat"
 
 
 def findArticulationPoints(graph, v):

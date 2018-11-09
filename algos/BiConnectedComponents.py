@@ -1,6 +1,6 @@
 import header
 import collections
-INP_FILE = "graph_articulation_points2.dat"
+INP_FILE = "../graphs/graph_articulation_points2.dat"
 
 
 def findBiConnectedComponents(graph, v):

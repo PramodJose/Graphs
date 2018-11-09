@@ -1,5 +1,5 @@
 import header
-INP_FILE = "graph_qsample.dat"
+INP_FILE = "../graphs/graph_qsample.dat"
 
 
 def DFS(graph, source):

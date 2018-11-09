@@ -1,5 +1,5 @@
 import header
-INP_FILE = "graph_edge_labelling.dat"
+INP_FILE = "../graphs/graph_edge_labelling.dat"
 
 
 def labelEdges(graph, v):
