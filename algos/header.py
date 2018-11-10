@@ -5,6 +5,7 @@ class Vertex:
         self.name = chr(ord('A') + Vertex.count)
         Vertex.count += 1
         self.adjVertices = []
+        self.revAdjVertices = []    # this is just a temporary list to hold the adjacent vertices while reversing a graph
         self.status = None
         self.indegree = 0
         self.dfsNum = None
@@ -75,6 +76,15 @@ class Graph:
             print()
         print()
 
+    def displayEdges(self):
+        edgeList = list(self.edges.values())
+
+        print("The edges are:-")
+        print("Src\tDest\tLabel\tWeight\tType")
+        for edge in edgeList:
+            print(edge.src.name + "\t" + edge.dest.name + "\t\t" + str(edge.label) + "\t\t" + str(edge.weight) + "\t\t" + str(edge.type))
+        print()
+
     def displayVerticesStatus(self):    # Primarily used for debugging code.
         print("The status of the vertices are:-")
 
@@ -87,3 +97,28 @@ class Graph:
         for i in range(self.vertexCount):
             self.vertices[i].status = None
             self.vertices[i].colour = None
+            self.vertices[i].dfsNum = None
+            self.vertices[i].low = None
+            self.vertices[i].parent = None
+
+    def revGraph(self):
+        tempEdges = self.edges
+        self.edges = {}
+        for vertex in self.vertices:
+            vertex.revAdjVertices = vertex.adjVertices
+            vertex.adjVertices = []
+            vertex.indegree = 0
+
+        for vertex in self.vertices:
+            for neighbour in vertex.revAdjVertices:
+                neighbour.adjVertices.append(vertex)
+                neighbour.indegree += 1
+
+                edge = tempEdges[(vertex, neighbour)]
+                tempVertex = edge.src
+                edge.src = edge.dest
+                edge.dest = tempVertex
+                edge.type = None
+
+                self.edges[(neighbour, vertex)] = edge
+            vertex.revAdjVertices = []
