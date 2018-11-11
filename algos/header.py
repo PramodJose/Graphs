@@ -102,6 +102,7 @@ class Graph:
             self.vertices[i].parent = None
 
     def revGraph(self):
+        self.reset()
         tempEdges = self.edges
         self.edges = {}
         for vertex in self.vertices:
