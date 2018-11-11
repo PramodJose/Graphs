@@ -12,6 +12,7 @@ class Vertex:
         self.low = None
         self.parent = None
         self.colour = None
+        self.dRow = None            # dijkstra Row
 
     def __del__(self):
         Vertex.count -= 1
