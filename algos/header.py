@@ -3,6 +3,7 @@ class Vertex:
 
     def __init__(self):
         self.name = chr(ord('A') + Vertex.count)
+        self.number = Vertex.count  # used by UnionFind for Kruskal's algo
         Vertex.count += 1
         self.adjVertices = []
         self.revAdjVertices = []    # this is just a temporary list to hold the adjacent vertices while reversing a graph
@@ -31,6 +32,10 @@ class Edge:
 
     def __del__(self):
         Edge.count -= 1
+
+    # This function is required while making a heap of the edges. This is required for implementing the Kruskal's algo.
+    def __lt__(self, other):
+        return self.weight < other.weight
 
 
 class Graph:
@@ -124,3 +129,71 @@ class Graph:
 
                 self.edges[(neighbour, vertex)] = edge
             vertex.revAdjVertices = []
+
+
+# This code has been adapted from: https://github.com/williamfiset/data-structures/tree/master/com/williamfiset/datastructures/unionfind
+# Explanation video & playlist on UnionFind: https://www.youtube.com/watch?v=KbFlZYCpONw&list=PLDV1Zeh2NRsBI1C-mR6ZhHTyfoEJWlxvq&index=5
+# Employs path compression.
+class UnionFind:
+    def __init__(self, size):
+        if size <= 0:
+            raise TypeError("size <= 0 is not allowed")
+
+        # Keeps track of the number of components.
+        # Initially, the number of components is equal to the number of vertices.
+        self.componentsCount = size
+
+        # Keeps track of the size of each component.
+        # Initially, all components have just one element in them, hence their size would be 1
+        self.componentSize = [1] * size
+
+        # link[i] points to the parent of i, if link[i] = i then i is a root node
+        self.link = []
+
+        # Initially, each vertex is its own parent.
+        for i in range(size):
+            self.link.append(i)
+
+    # Find which component/set 'v' belongs to; takes amortized constant time.
+    # Employs path compression.
+    def find(self, v):
+        root = v
+
+        # Find the root of the component/set
+        while root != self.link[root]:
+            root = self.link[root]
+
+        # Compress the path leading back to the root.
+        # Doing this operation is called "path compression" and is what gives us amortized time complexity.
+        while self.link[v] != root:
+            nextNode = self.link[v]
+            self.link[v] = root
+            v = nextNode
+
+        return root
+
+    def connected(self, v, w):
+        return self.find(v) == self.find(w)
+
+    def componentSize(self, v):
+        return self.componentSize[self.find(v)]
+
+    # Unify the components/sets containing elements 'v' and 'w'
+    def unify(self, v, w):
+        root1 = self.find(v)
+        root2 = self.find(w)
+
+        # These elements are already in the same group!
+        if root1 == root2:
+            return
+
+        # Merge smaller component/set into the larger one.
+        if self.componentSize[root1] < self.componentSize[root2]:
+            self.componentSize[root2] += self.componentSize[root1]
+            self.link[root1] = root2
+        else:
+            self.componentSize[root1] += self.componentSize[root2]
+            self.link[root2] = root1
+
+        # Since the roots found are different we know that the number of components/sets has decreased by one
+        self.componentsCount -= 1
