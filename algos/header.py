@@ -119,7 +119,7 @@ class Graph:
         for vertex in self.vertices:
             for neighbour in vertex.revAdjVertices:
                 neighbour.adjVertices.append(vertex)
-                neighbour.indegree += 1
+                vertex.indegree += 1
 
                 edge = tempEdges[(vertex, neighbour)]
                 tempVertex = edge.src
