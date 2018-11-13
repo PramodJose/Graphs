@@ -122,9 +122,8 @@ class Graph:
                 vertex.indegree += 1
 
                 edge = tempEdges[(vertex, neighbour)]
-                tempVertex = edge.src
-                edge.src = edge.dest
-                edge.dest = tempVertex
+                edge.src = neighbour
+                edge.dest = vertex
                 edge.type = None
 
                 self.edges[(neighbour, vertex)] = edge
