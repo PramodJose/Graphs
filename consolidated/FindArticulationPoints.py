@@ -1,7 +1,3 @@
-import header
-INP_FILE = "../graphs/graph_articulation_points_graph5.dat"
-
-
 def findArticulationPoints(graph, v, fout):
     try:
         findArticulationPoints.counter += 1

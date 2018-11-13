@@ -1,53 +1,59 @@
-INP_FILE = "graph.dat"
-NUMBER_OF_VERTICES = 7
+INP_FILE = "graph.dat"          # specifies the input file which contains the graph information
+NUMBER_OF_VERTICES = 7          # constant denoting number of vertices per graph
 
 
+# This class defines the blueprint of a Vertex object.
 class Vertex:
-    count = 0
+    count = 0                       # class variable (not an instance variable) used to automatically name vertices.
 
-    def __init__(self):
-        self.name = chr(ord('A') + Vertex.count)
-        self.number = Vertex.count  # used by UnionFind for Kruskal's algo
+    def __init__(self):             # constructor
+        self.name = chr(ord('A') + Vertex.count)    # automatically names vertices starting from 'A'
+        self.number = Vertex.count  # used by UnionFind for Kruskal's algo; used as an index into the array which keeps track of the components.
         Vertex.count += 1
-        self.adjVertices = []
+        self.adjVertices = []       # an array of pointers pointing to the adjacent vertices
         self.revAdjVertices = []    # this is just a temporary list to hold the adjacent vertices while reversing a graph
-        self.status = None
-        self.indegree = 0
-        self.dfsNum = None
-        self.low = None
-        self.parent = None
-        self.colour = None
-        self.dRow = None            # dijkstra Row
+        self.status = None          # the status can be made "Visited" when a vertex has been visited; by default it is None (NULL)
+        self.indegree = 0           # keeps track of the indegree of a vertex
+        self.dfsNum = None          # keeps track of the discovery number of a vertex during a DFS traversal.
+        self.low = None             # keeps track of the lowest vertex DFSnum that can be reached from a vertex; used in finding Articulation points
+        self.parent = None          # keeps track of the parent node of a vertex; used in finding articulation points.
+        self.colour = None          # used to keep track of whether a vertex has already been printed once; used in finding
+                                    # articulation points, when the same vertex is identified as an articulation point by multiple sub-graphs
+        self.dRow = None            # stores a pointer to dijkstra-Row object; which contains fields used during Dijkstra's algo
 
-    def __del__(self):
-        Vertex.count -= 1
+    def __del__(self):              # destructor
+        Vertex.count -= 1           # if any temporary Vertex object gets created, then reduce the count as soon as it goes out of scope
+                                    # so that the next Vertex object would get that name.
 
-    def reset(self):
+    def reset(self):                # resets the class counter. Used before reading a new graph
         Vertex.count = 0
 
 
+# This class defines the blueprint of an Edge object.
 class Edge:
-    count = 1
+    count = 1                       # class variable (not an instance variable) used to automatically number edges.
 
-    def __init__(self):
-        self.label = Edge.count
+    def __init__(self):             # constructor
+        self.label = Edge.count     # automatically numbers vertices starting from 1
         Edge.count += 1
-        self.weight = 0
-        self.src = None
-        self.dest = None
-        self.type = None
+        self.weight = 0             # stores the weight of the edge
+        self.src = None             # a pointer to the source vertex object
+        self.dest = None            # a pointer to the destination vertex object
+        self.type = None            # stores the type of the edge; used while labelling edges (not relevant for this assignment).
+                                    # Will be used to classify edges into tree, back, forward and cross edges
 
-    def __del__(self):
-        Edge.count -= 1
+    def __del__(self):              # destructor
+        Edge.count -= 1             # if any temporary Edge object gets created, then reduce the count as soon as it goes out of scope
+                                    # so that the next Vertex object would get that number.
 
-    # This function is required while making a heap of the edges. This is required for implementing the Kruskal's algo.
-    def __lt__(self, other):
-        return self.weight < other.weight
+    def __lt__(self, other):        # This function compares two Edge objects; and is required while making a heap of the edges.
+        return self.weight < other.weight   # Such a heap is required for implementing the Kruskal's algo.
 
     def reset(self):
-        Edge.count = 0
+        Edge.count = 0              # resets the class counter. Used before reading a new graph
 
 
+# This class defines the blueprint of a Graph object. A graph is a set of Vertices and Edges.
 class Graph:
 
     def __init__(self, fin, vertexCount):
