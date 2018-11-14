@@ -2,13 +2,13 @@ import heapq
 import header
 
 
-def graphToHeap(graph):
-    edgesHeap = list(graph.edges.values())
-    heapq.heapify(edgesHeap)
-    return edgesHeap
+def graphToHeap(graph):                     # This function creates a min heap out of the edges of a graph
+    edgesHeap = list(graph.edges.values())  # create a list (array) of all the Edge objects of a graph
+    heapq.heapify(edgesHeap)                # create a min heap of the edges (the same array is used to store the heap)..
+    return edgesHeap                        # ..and return it
 
 
-def kruskal(graph, fout):
+def kruskal(graph, fout):                   # This function
     uf = header.UnionFind(graph.vertexCount)    # the union find object...
     edgesHeap = graphToHeap(graph)              # a heap of all the edges
     edgesAccepted = 0
