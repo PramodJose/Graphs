@@ -16,7 +16,7 @@ def kruskal(graph):
     cost = 0
 
     print("Edges in the MST are:-")
-    while edgesAccepted < graph.vertexCount - 1:
+    while edgesAccepted != graph.vertexCount - 1:
         minEdge = heapq.heappop(edgesHeap)
 
         if not uf.connected(minEdge.src.number, minEdge.dest.number):
