@@ -26,10 +26,10 @@ class DTable:
         return lowestRow.vertex
 
 
-def printPath(source, dest, fout, last = True):                       # if last = True, then it is the very first call
+def printPath(source, dest, fout, last = True):                 # if last = True, then it is the very first call
     if last and source == dest:                                 # if source & dest are the same & it's the 1st call then
-        fout.write("(" + dest.name + " -> " + dest.name+ ")\n")   # it means that we are printing the path from the source
-        return                                                  # to itself
+        fout.write("(" + dest.name + " -> " + dest.name+ ")\n")     # it means that we are printing the path from the source
+        return                                                      # to itself
 
     elif dest.dRow.path == 0:       # we have reached the end of the recursion; i.e., we have reached the source
         fout.write("(" + dest.name + " -> ")

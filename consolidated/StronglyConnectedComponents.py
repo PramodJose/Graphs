@@ -1,6 +1,6 @@
-# This piece of source code has been inspired by Padhmamala ma'am's notes and geeksforgeeks.org.
+# This piece of source code has been inspired by Padmamala ma'am's notes and geeksforgeeks.org.
 # Link: https://www.geeksforgeeks.org/strongly-connected-components/
-# Status of this code: Rough; works on all inputs, but still need to clean it and add comments.
+# Status of this code: Rough; works on all inputs, but still need to clean it.
 import collections
 
 
