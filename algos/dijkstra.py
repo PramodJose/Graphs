@@ -66,10 +66,10 @@ def dijkstra(graph, source):
     for vertex in graph.vertices:
         print("Shortest path from", source.name, "to", vertex.name, "Distance: ", end= "")
         if vertex.dRow.dist is None:
-            print("INF", end= "")
+            print("INF", end="")
         else:
             print(vertex.dRow.dist, "", end="")
-        printPath(source, vertex)
+            printPath(source, vertex)
 
 
 fin = open(INP_FILE, "r")
