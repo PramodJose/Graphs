@@ -14,6 +14,7 @@ class Vertex:
         self.parent = None
         self.colour = None
         self.dRow = None            # dijkstra Row
+        self.bipartite_set = None   # indicates the set number to which a vertex belongs to
 
     def __del__(self):
         Vertex.count -= 1
